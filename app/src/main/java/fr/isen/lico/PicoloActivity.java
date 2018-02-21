@@ -4,31 +4,25 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import android.widget.LinearLayout;
 
 public class PicoloActivity extends AppCompatActivity {
+    public int numberOfLines = 3;
+
+    private LinearLayout mEditTextContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picolo);
+        mEditTextContainer = (LinearLayout)findViewById(R.id.linearLayoutDecisions);
 
         final ImageView ivBack = findViewById(R.id.ivBack);
         final ImageView ivAdd = findViewById(R.id.ivAdd);
-        final EditText etPlayer4 = findViewById(R.id.player4);
-
-        final ListView lv = findViewById(R.id.listview);
-        String[] array = {"Player 1", "Player 2", "Player 3"};
-        final ArrayList<String> lat = new ArrayList<String>(Arrays.asList(array));
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lat);
-
-        lv.setAdapter(adapter);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
 
@@ -40,14 +34,33 @@ public class PicoloActivity extends AppCompatActivity {
             }
         });
 
-        ivAdd.setOnClickListener(new View.OnClickListener() {
 
+        final Button Add_button = (Button) findViewById(R.id.add_button);
+        Add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nomJoueur = etPlayer4.getText().toString();
-                lat.add(nomJoueur);
-                lv.setAdapter(adapter);
+                Add_Line();
             }
         });
+
+        final Button remove_button = (Button) findViewById(R.id.remove_button);
+        remove_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeLine();
+            }
+        });
+    }
+
+    public void Add_Line() {
+        EditText et = new EditText(this);
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        et.setLayoutParams(p);
+        et.setHint("Enter Answer #" + (mEditTextContainer.getChildCount()+1));
+        mEditTextContainer.addView(et);
+    }
+
+    public void removeLine() {
+        mEditTextContainer.removeViewAt(mEditTextContainer.getChildCount()-1);
     }
 }

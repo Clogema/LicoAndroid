@@ -7,7 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class menuLicoActivity extends AppCompatActivity {
+
+    private int nbJoueur;
+    private List<String> player = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +25,7 @@ public class menuLicoActivity extends AppCompatActivity {
         final ImageView ivSetting = findViewById(R.id.ivSettings);
 
         Intent intent = getIntent();
-        final String player1 = intent.getStringExtra("player1");
-        final String player2 = intent.getStringExtra("player2");
+        nbJoueur = intent.getIntExtra("nbJoueur", nbJoueur);
 
         ivPicolo.setOnClickListener(new View.OnClickListener() {
 
@@ -45,8 +50,7 @@ public class menuLicoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(menuLicoActivity.this, SettingActivity.class);
-                intent.putExtra("player1", player1);
-                intent.putExtra("player2", player2);
+                intent.putExtra("nbJoueur", nbJoueur);
                 startActivity(intent);
             }
         });

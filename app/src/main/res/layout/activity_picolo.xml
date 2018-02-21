@@ -27,54 +27,97 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listview">
-
-        <EditText
-            android:id="@+id/player4"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="@string/player4"
-            android:textColor="@color/textGrey"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listview" />
-
-    </android.support.design.widget.TextInputLayout>
-
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="344dp"
-        android:layout_height="358dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivBack" />
-
     <ImageView
         android:id="@+id/ivAdd"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="2dp"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
         app:srcCompat="@drawable/newuser" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="296dp"
+        android:layout_height="299dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutMain"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linearLayoutDecisions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/editText3"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="center"
+                    android:hint="Enter Answer #2"
+                    android:textAlignment="viewStart" />
+
+                <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="center"
+                    android:hint="Enter Answer #1"
+                    android:textAlignment="viewStart" />
+
+                <EditText
+                    android:id="@+id/editText4"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="center"
+                    android:hint="Enter Answer #3"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/add_button"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="+"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="18sp"/>
+
+                <Button
+                    android:id="@+id/remove_button"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="-"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="18sp"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
