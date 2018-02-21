@@ -6,4 +6,4 @@
     android:paddingBottom="3dip"
     android:paddingTop="2dip"
     android:textColor="@color/textGrey"
-    android:textSize="15sp" />
+    android:textSize="18sp" />

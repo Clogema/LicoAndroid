@@ -73,7 +73,7 @@
             android:layout_weight="1"
             android:text="@string/useless"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <Switch
@@ -92,7 +92,7 @@
     <LinearLayout
         android:id="@+id/linearLayout7"
         android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:orientation="vertical"
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:text="@string/listeJoueur"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <ListView
@@ -121,7 +121,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout8"
-        android:layout_width="330dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -139,7 +139,7 @@
             android:text="@string/credit"
             android:textAlignment="center"
             android:textColor="@color/textGrey"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -149,7 +149,7 @@
             android:text="@string/Lisa"
             android:textAlignment="center"
             android:textColor="@color/textGrey"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvGauthier"
@@ -158,7 +158,7 @@
             android:text="@string/Gauthier"
             android:textAlignment="center"
             android:textColor="@color/textGrey"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvLolo"
@@ -167,7 +167,7 @@
             android:text="@string/Lolo"
             android:textAlignment="center"
             android:textColor="@color/textGrey"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvTitou"
@@ -176,7 +176,7 @@
             android:text="@string/Titou"
             android:textAlignment="center"
             android:textColor="@color/textGrey"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -190,7 +190,7 @@
         android:text="@string/Canaab"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

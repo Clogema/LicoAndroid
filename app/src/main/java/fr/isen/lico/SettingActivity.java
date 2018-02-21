@@ -56,20 +56,21 @@ public class SettingActivity extends AppCompatActivity {
         /***** Test Bouton Inutile *****/
         sUseless.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(SettingActivity.this);
-                alertDialogBuilder.setTitle("Félicitation !");
-                alertDialogBuilder.setMessage("Bravo pour ta découverte, tu peux boire 2 gorgées !");
-                alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int arg1) {
-                        dialog.cancel();
-                    }
-                });
+                if(sUseless.isChecked()) {
+                    android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(SettingActivity.this);
+                    alertDialogBuilder.setTitle("Félicitation !");
+                    alertDialogBuilder.setMessage("Bravo pour ta découverte, tu peux boire 2 gorgées !");
+                    alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int arg1) {
+                            dialog.cancel();
+                            sUseless.setChecked(false);
+                        }
+                    });
 
-                android.app.AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-
-                sUseless.setChecked(false);
+                    android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                }
             }
         });
     }

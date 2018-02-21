@@ -1,10 +1,13 @@
 package fr.isen.lico;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,47 +36,119 @@ public class MenuLicoActivity extends AppCompatActivity {
         player = getIntent().getStringArrayListExtra("player");
 
         /***** Redirection *****/
+        /** PICOLO */
         ivPicolo.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuLicoActivity.this, PicoloActivity.class);
-                intent.putStringArrayListExtra("player", (ArrayList<String>) player);
-                intent.putExtra("nbJoueur", nbJoueur);
-                startActivity(intent);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MenuLicoActivity.this);
+                alertDialogBuilder.setTitle(R.string.picolo);
+                alertDialogBuilder.setMessage(R.string.descPicolo);
+                alertDialogBuilder.setPositiveButton("Jouer", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        Intent intent = new Intent(MenuLicoActivity.this, PicoloActivity.class);
+                        intent.putStringArrayListExtra("player", (ArrayList<String>) player);
+                        intent.putExtra("nbJoueur", nbJoueur);
+                        startActivity(intent);
+                    }
+                });
+                alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
 
+        /** HIGHWAY */
         ivHighway.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuLicoActivity.this, HighwayActivity.class);
-                intent.putStringArrayListExtra("player", (ArrayList<String>) player);
-                intent.putExtra("nbJoueur", nbJoueur);
-                startActivity(intent);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MenuLicoActivity.this);
+                alertDialogBuilder.setTitle(R.string.highway);
+                alertDialogBuilder.setMessage(R.string.descHighway);
+                alertDialogBuilder.setPositiveButton("Jouer", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        Intent intent = new Intent(MenuLicoActivity.this, PicoloActivity.class);
+                        intent.putStringArrayListExtra("player", (ArrayList<String>) player);
+                        intent.putExtra("nbJoueur", nbJoueur);
+                        startActivity(intent);
+                    }
+                });
+                alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
 
+        /** BETSUM */
         ivBetsum.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuLicoActivity.this, BetSumActivity.class);
-                intent.putStringArrayListExtra("player", (ArrayList<String>) player);
-                intent.putExtra("nbJoueur", nbJoueur);
-                startActivity(intent);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MenuLicoActivity.this);
+                alertDialogBuilder.setTitle(R.string.sum);
+                alertDialogBuilder.setMessage(R.string.descBetSum);
+                alertDialogBuilder.setPositiveButton("Jouer", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        Intent intent = new Intent(MenuLicoActivity.this, PicoloActivity.class);
+                        intent.putStringArrayListExtra("player", (ArrayList<String>) player);
+                        intent.putExtra("nbJoueur", nbJoueur);
+                        startActivity(intent);
+                    }
+                });
+                alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
 
+        /** SELFDRAW */
         ivSelfdraw.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuLicoActivity.this, SelfDrawActivity.class);
-                intent.putStringArrayListExtra("player", (ArrayList<String>) player);
-                intent.putExtra("nbJoueur", nbJoueur);
-                startActivity(intent);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MenuLicoActivity.this);
+                alertDialogBuilder.setTitle(R.string.selfdraw);
+                alertDialogBuilder.setMessage(R.string.descDrawSelf);
+                alertDialogBuilder.setPositiveButton("Jouer", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        Intent intent = new Intent(MenuLicoActivity.this, PicoloActivity.class);
+                        intent.putStringArrayListExtra("player", (ArrayList<String>) player);
+                        intent.putExtra("nbJoueur", nbJoueur);
+                        startActivity(intent);
+                    }
+                });
+                alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
 
