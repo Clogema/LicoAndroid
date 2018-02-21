@@ -71,10 +71,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getPlayer();
-                Intent intent = new Intent(MainActivity.this, MenuLicoActivity.class);
-                intent.putStringArrayListExtra("player", (ArrayList<String>) player);
-                intent.putExtra("nbJoueur", nbJoueur);
-                startActivity(intent);
+                if (nbJoueur >= 2 && nbJoueur <= 10) {
+                    Intent intent = new Intent(MainActivity.this, MenuLicoActivity.class);
+                    intent.putStringArrayListExtra("player", (ArrayList<String>) player);
+                    intent.putExtra("nbJoueur", nbJoueur);
+                    startActivity(intent);
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Vous êtes pas assez", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
 
