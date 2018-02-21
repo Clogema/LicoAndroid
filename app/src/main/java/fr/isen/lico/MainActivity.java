@@ -33,10 +33,9 @@ public class MainActivity extends AppCompatActivity {
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/gomarice_gogono_cocoa_mochi.ttf");
         tvTitle.setTypeface(typeface);
 
-        /***** LinearLayout *****/
+        /***** Element de la vue *****/
         mEditTextContainer = (LinearLayout)findViewById(R.id.linearLayoutDecisions);
 
-        /***** EditText *****/
         final EditText et1 = findViewById(R.id.editText1);
         editTextList.add(et1);
         final EditText et2 = findViewById(R.id.editText2);
@@ -44,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         final EditText et3 = findViewById(R.id.editText3);
         editTextList.add(et3);
 
-        /***** Boutons *****/
         final Button btSubmit = findViewById(R.id.submit);
         final ImageView ivSetting = findViewById(R.id.ivSettings);
         final ImageView ivAdd = findViewById(R.id.ivAdd);
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getPlayer();
-                Intent intent = new Intent(MainActivity.this, menuLicoActivity.class);
+                Intent intent = new Intent(MainActivity.this, MenuLicoActivity.class);
                 intent.putStringArrayListExtra("player", (ArrayList<String>) player);
                 intent.putExtra("nbJoueur", nbJoueur);
                 startActivity(intent);
@@ -124,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /***** Récupérer la liste des joueurs *****/
     public void getPlayer() {
         nbJoueur = 0;
         player.clear();

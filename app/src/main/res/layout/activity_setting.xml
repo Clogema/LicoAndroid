@@ -7,132 +7,194 @@
     android:background="@color/colorPrimary"
     tools:context="fr.isen.lico.SettingActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="96dp"
-        android:text="Liste des joueurs :"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="34dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
-    <Switch
-        android:id="@+id/sUseless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="32dp"
-        android:shadowColor="@color/colorPrimaryDark"
-        android:textColor="@color/colorPrimaryDark"
-        android:textColorHighlight="@color/colorPrimaryDark"
-        android:textColorHint="@color/colorPrimaryDark"
-        android:textColorLink="@color/colorPrimaryDark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvUseless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="@string/useless"
-        app:layout_constraintBottom_toBottomOf="@+id/sUseless"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tvCredit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/credit"
-        android:textColor="@color/textGrey"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tvLisa"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/Lisa"
-        android:textColor="@color/textGrey"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCredit" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
-    <TextView
-        android:id="@+id/tvGauthier"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvNbJoueur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/nbJoueur"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvNbjoueur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textColor="@color/textGrey"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/Gauthier"
-        android:textColor="@color/textGrey"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLisa" />
+        app:layout_constraintTop_toBottomOf="@+id/ivBack">
 
-    <TextView
-        android:id="@+id/tvLolo"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvUseless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/useless"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Switch
+            android:id="@+id/sUseless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHighlight="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textColorLink="@color/colorPrimaryDark" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+        <TextView
+            android:id="@+id/tvListeJoueur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/listeJoueur"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/lvJoueur"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/colorPrimary"
+            android:footerDividersEnabled="false" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/Lolo"
-        android:textColor="@color/textGrey"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/tvCanaab"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvGauthier" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
-    <TextView
-        android:id="@+id/tvTitou"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/Titou"
-        android:textColor="@color/textGrey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLolo" />
+        <TextView
+            android:id="@+id/tvCredit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/credit"
+            android:textAlignment="center"
+            android:textColor="@color/textGrey"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvLisa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Lisa"
+            android:textAlignment="center"
+            android:textColor="@color/textGrey"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvGauthier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Gauthier"
+            android:textAlignment="center"
+            android:textColor="@color/textGrey"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvLolo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Lolo"
+            android:textAlignment="center"
+            android:textColor="@color/textGrey"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvTitou"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Titou"
+            android:textAlignment="center"
+            android:textColor="@color/textGrey"
+            android:textSize="15sp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvCanaab"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:text="@string/Canaab"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitou" />
-
-    <ListView
-        android:id="@+id/lvJoueur"
-        android:layout_width="344dp"
-        android:layout_height="217dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="120dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
 
 </android.support.constraint.ConstraintLayout>
