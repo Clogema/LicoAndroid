@@ -3,6 +3,8 @@ package fr.isen.lico;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,15 +20,17 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
+        final ListView mListView = (ListView) findViewById(R.id.lvJoueur);
+
         player = new ArrayList<String>();
 
         Intent intent = getIntent();
         nbJoueur = intent.getIntExtra("nbJoueur", nbJoueur);
-        player.clear();
         player = getIntent().getStringArrayListExtra("player");
 
-        final TextView listejoueur = findViewById(R.id.textView2);
-        listejoueur.setText(String.valueOf(nbJoueur) + player.toString());
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(SettingActivity.this,
+                android.R.layout.simple_list_item_1, player);
+        mListView.setAdapter(adapter);
 
     }
 }

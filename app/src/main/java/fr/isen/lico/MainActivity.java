@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getPlayer();
                 Intent intent = new Intent(MainActivity.this, menuLicoActivity.class);
+                intent.putStringArrayListExtra("player", (ArrayList<String>) player);
+                intent.putExtra("nbJoueur", nbJoueur);
                 startActivity(intent);
             }
         });

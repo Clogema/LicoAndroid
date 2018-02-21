@@ -26,6 +26,7 @@ public class menuLicoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         nbJoueur = intent.getIntExtra("nbJoueur", nbJoueur);
+        player = getIntent().getStringArrayListExtra("player");
 
         ivPicolo.setOnClickListener(new View.OnClickListener() {
 
@@ -50,6 +51,7 @@ public class menuLicoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(menuLicoActivity.this, SettingActivity.class);
+                intent.putStringArrayListExtra("player", (ArrayList<String>) player);
                 intent.putExtra("nbJoueur", nbJoueur);
                 startActivity(intent);
             }
