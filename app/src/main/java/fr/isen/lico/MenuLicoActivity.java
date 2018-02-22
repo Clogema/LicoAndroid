@@ -76,7 +76,7 @@ public class MenuLicoActivity extends AppCompatActivity {
                 alertDialogBuilder.setPositiveButton("Jouer", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int arg1) {
-                        Intent intent = new Intent(MenuLicoActivity.this, PicoloActivity.class);
+                        Intent intent = new Intent(MenuLicoActivity.this, HighwayActivity.class);
                         intent.putStringArrayListExtra("player", (ArrayList<String>) player);
                         intent.putExtra("nbJoueur", nbJoueur);
                         startActivity(intent);
@@ -105,7 +105,7 @@ public class MenuLicoActivity extends AppCompatActivity {
                 alertDialogBuilder.setPositiveButton("Jouer", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int arg1) {
-                        Intent intent = new Intent(MenuLicoActivity.this, PicoloActivity.class);
+                        Intent intent = new Intent(MenuLicoActivity.this, BetSumActivity.class);
                         intent.putStringArrayListExtra("player", (ArrayList<String>) player);
                         intent.putExtra("nbJoueur", nbJoueur);
                         startActivity(intent);
@@ -134,7 +134,7 @@ public class MenuLicoActivity extends AppCompatActivity {
                 alertDialogBuilder.setPositiveButton("Jouer", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int arg1) {
-                        Intent intent = new Intent(MenuLicoActivity.this, PicoloActivity.class);
+                        Intent intent = new Intent(MenuLicoActivity.this, SelfDrawActivity.class);
                         intent.putStringArrayListExtra("player", (ArrayList<String>) player);
                         intent.putExtra("nbJoueur", nbJoueur);
                         startActivity(intent);
