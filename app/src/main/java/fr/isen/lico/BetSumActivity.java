@@ -83,6 +83,8 @@ public class BetSumActivity extends AppCompatActivity {
                             AlertDialog alertDialog = alertDialogBuilder.create();
                             alertDialog.show();
                         } else {
+                            number = (int)(Math.random() * 10);
+                            tvNumber.setText(Integer.toString(number));
                             tvPlayer.setText(player.get(i));
                         }
                     }
