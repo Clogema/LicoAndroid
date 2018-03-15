@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "820313879221",
+    "firebase_url": "https://lico-picolo.firebaseio.com",
+    "project_id": "lico-picolo",
+    "storage_bucket": "lico-picolo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820313879221:android:cb5d3d7c8870ca80",
+        "android_client_info": {
+          "package_name": "fr.isen.lico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820313879221-fcb5bmrrv0o21aphesmcu1h88nhok0gh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.isen.lico",
+            "certificate_hash": "197c01bc2350610848ebb299dcec82af58419763"
+          }
+        },
+        {
+          "client_id": "820313879221-25asldca7v76i9g35ar68rhdaf9fe6c8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcv7vrmp_qisfRD-z4AYfuIA8zl6zEmE0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820313879221-25asldca7v76i9g35ar68rhdaf9fe6c8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

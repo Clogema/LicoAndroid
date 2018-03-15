@@ -10,6 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +23,7 @@ public class PicoloActivity extends AppCompatActivity {
 
     private int nbJoueur;
     private List<String> player = new ArrayList<String>();
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,5 +58,31 @@ public class PicoloActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        /***** Firebase *****/
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
+                    //String name = (String) messageSnapshot.child("Divers").getValue();
+                    String message = (String) messageSnapshot.child("Dilemme").getValue();
+
+                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Toast toast = Toast.makeText(getApplicationContext(), "Failed to read value", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
     }
 }
