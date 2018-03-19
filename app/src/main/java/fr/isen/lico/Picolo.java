@@ -20,6 +20,11 @@ public class Picolo {
         this.Jeu = Jeu;
     }
 
+    public String getRandomJeu ()
+    {
+        return Jeu.getRandom();
+    }
+
     public String[] getDivers ()
     {
         return Divers;

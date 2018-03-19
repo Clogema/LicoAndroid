@@ -20,9 +20,19 @@ public class Jeu {
         this.Theme = Theme;
     }
 
+    public String getRandomTheme ()
+    {
+        return Theme[(int)(Math.random() * Theme.length)];
+    }
+
     public String[] getDilemme ()
     {
         return Dilemme;
+    }
+
+    public String getRandomDilemme ()
+    {
+        return Dilemme[(int)(Math.random() * Dilemme.length)];
     }
 
     public void setDilemme (String[] Dilemme)
@@ -40,9 +50,35 @@ public class Jeu {
         this.Divers = Divers;
     }
 
+    public String getRandomDivers ()
+    {
+        String rand = Divers[(int)(Math.random() * Divers.length)];
+        rand = rand.replace("THEME", getRandomTheme());
+        rand = rand.replace("DILEMME", getRandomDilemme());
+        return rand;
+    }
+
     public String[] getCaliente ()
     {
         return Caliente;
+    }
+
+    public String getRandomCaliente ()
+    {
+        return Caliente[(int)(Math.random() * Caliente.length)];
+    }
+
+    public String getRandom ()
+    {
+        String rand = "";
+        int i = (int)(Math.random() * 100);
+
+        if(i < 20)
+            rand = getRandomCaliente() + "";
+        else
+            rand = getRandomDivers() + "";
+
+        return rand;
     }
 
     public void setCaliente (String[] Caliente)

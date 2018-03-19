@@ -22,6 +22,7 @@ public class PicoloActivity extends AppCompatActivity {
 
     private Picolo picolo;
     private String defi;
+    private String theme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +60,16 @@ public class PicoloActivity extends AppCompatActivity {
             }
         });
 
+
         /***** Récupérer BDD *****/
         new HttpHandler(new CallBackInterface() {
             @Override
             public void success(String json) {
                 Gson gson = new GsonBuilder().create();
                 picolo = gson.fromJson(json, Picolo.class);
+                defi = getDefi();
+                tvDefi.setText(defi);
+                tvTheme.setText(theme);
             }
 
             @Override
@@ -73,19 +78,44 @@ public class PicoloActivity extends AppCompatActivity {
             }
         }).execute("");
 
+
         /***** Afficher Défi *****/
         tvDefi.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 defi = getDefi();
                 tvDefi.setText(defi);
+                tvTheme.setText(theme);
             }
         });
-
     }
 
     private String getDefi() {
-        return picolo.getRandomDivers();
+        String d = "";
+        int rand1, rand2;
+
+        int i = (int)(Math.random() * 200);
+
+        if (i < 100) {
+            d = picolo.getRandomDivers();
+            theme = "Divers";
+        } else {
+            d = picolo.getRandomJeu();
+            theme = "Jeu";
+        }
+
+        rand1 = (int)(Math.random() * nbJoueur);
+
+        d = d.replace("%X%", Integer.toString((int)(Math.random() * 5) + 2));
+        d = d.replace("%P%", player.get(rand1));
+
+        do
+        {
+            rand2 = (int)(Math.random() * nbJoueur);
+        } while (rand2 == rand1);
+
+        d = d.replace("%P2%", player.get(rand2));
+
+        return d;
     }
 }
