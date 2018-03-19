@@ -1,5 +1,7 @@
 package fr.isen.lico;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,13 +23,16 @@ import java.util.Random;
 public class HighwayActivity extends AppCompatActivity {
 
     private int nbJoueur;
-    private int nbManche, numCard;
-    private int manche;
+    private int nbManche, numCard, numManche;
     private int i, id;
-    private int valueCard;
+    private int oldValueCard, newValueCard;
     private List<String> player = new ArrayList<String>();
+    private List<String> usedCard = new ArrayList<String>();
     private List<String> cardKey;
     private Map<String, Integer> cards;
+    private ImageView ivBack, ivSetting, ivCard, ivCard1, ivCard2, ivCard3, ivCard4, ivCard5, ivCard6;
+    private Button btMoins, btPlus;
+    private TextView tvPlayer, tvManche;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +40,19 @@ public class HighwayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_highway);
 
         /***** Element de la vue *****/
-        final ImageView ivBack = findViewById(R.id.ivBack);
-        final ImageView ivSetting = findViewById(R.id.ivSettings);
-        final ImageView ivCard = findViewById(R.id.ivCard);
-        final ImageView ivCard1 = findViewById(R.id.ivCard1);
-        final ImageView ivCard2 = findViewById(R.id.ivCard2);
-        final ImageView ivCard3 = findViewById(R.id.ivCard3);
-        final ImageView ivCard4 = findViewById(R.id.ivCard4);
-        final ImageView ivCard5 = findViewById(R.id.ivCard5);
-        final ImageView ivCard6 = findViewById(R.id.ivCard6);
-        final Button btMoins = findViewById(R.id.btMoins);
-        final Button btPlus = findViewById(R.id.btPlus);
-        final TextView tvPlayer = findViewById(R.id.tvPlayer);
-        final TextView tvManche = findViewById(R.id.tvManche);
+        ivBack = findViewById(R.id.ivBack);
+        ivSetting = findViewById(R.id.ivSettings);
+        ivCard = findViewById(R.id.ivCard);
+        ivCard1 = findViewById(R.id.ivCard1);
+        ivCard2 = findViewById(R.id.ivCard2);
+        ivCard3 = findViewById(R.id.ivCard3);
+        ivCard4 = findViewById(R.id.ivCard4);
+        ivCard5 = findViewById(R.id.ivCard5);
+        ivCard6 = findViewById(R.id.ivCard6);
+        btMoins = findViewById(R.id.btMoins);
+        btPlus = findViewById(R.id.btPlus);
+        tvPlayer = findViewById(R.id.tvPlayer);
+        tvManche = findViewById(R.id.tvManche);
 
         /***** Récupération des données *****/
         Intent intent = getIntent();
@@ -77,9 +82,284 @@ public class HighwayActivity extends AppCompatActivity {
         /***** Algo du jeu *****/
         /* Initialisation */
         nbManche = 3;
-        manche = 1;
+        numManche = 0;
         i = 0;
+
+        initCards();
+        cardKey = new ArrayList<>(cards.keySet());
+        nextCard();
+        newManche();
+        oldValueCard = getValueCard(id);
+
+        tvPlayer.setText(player.get(i));
+        tvManche.setText("Manche " + Integer.toString(numManche));
+
+        btPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                newValueCard = nextCard();
+                printCard();
+
+                if (newValueCard > oldValueCard){
+                    if(numCard == 6) {
+                        i++;
+                        alerteGagne(player.get(i-1));
+                        if (i >= nbJoueur) {
+                            alerteFinJeu();
+                        }
+                    }
+                    oldValueCard = newValueCard;
+                }
+                else {
+                    if(numManche >= nbManche)  {
+                        i++;
+                        alertePerduPlayer();
+                    }
+                    else {
+                        alertePerdu(7-numCard);
+                    }
+                }
+            }
+        });
+
+        btMoins.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newValueCard = nextCard();
+                printCard();
+
+                if (newValueCard < oldValueCard){
+                    if(numCard == 6) {
+                        i++;
+                        alerteGagne(player.get(i-1));
+                        if (i >= nbJoueur) {
+                            alerteFinJeu();
+                        }
+                    }
+                    oldValueCard = newValueCard;
+                }
+                else {
+                    if(numManche >= nbManche)  {
+                        i++;
+                        alertePerduPlayer();
+                    }
+                    else {
+                        alertePerdu(7-numCard);
+                    }
+                }
+
+            }
+        });
+    }
+
+    private void newManche()
+    {
+        usedCard.clear();
         numCard = 1;
+        numManche++;
+        printCard();
+        tvManche.setText("Manche " + Integer.toString(numManche));
+    }
+
+    private int nextCard()
+    {
+        int value;
+
+        numCard++;
+        this.id = getRandomCard();
+        value = getValueCard(this.id);
+        ivCard.setImageResource(this.id);
+
+        return value;
+    }
+
+    private void nextPlayer() {
+        numManche = 0;
+        alerteNextPlayer(player.get(i));
+        tvPlayer.setText(player.get(i));
+    }
+
+    private int getRandomCard() {
+        int imageID;
+        Random rand;
+        String randomCard;
+
+        do {
+            rand = new Random();
+            randomCard = cardKey.get(rand.nextInt(cardKey.size()));
+            imageID = getResources().getIdentifier(randomCard, "drawable", getPackageName());
+        } while (testID(usedCard, randomCard) == 1);
+
+        usedCard.add(randomCard);
+
+        return imageID;
+    }
+
+    private int getValueCard(int id){
+        int value = 0;
+        String card = getResources().getResourceEntryName(id);
+
+        value = getValueCard(card);
+
+        return value;
+    }
+
+    private int getValueCard(String id){
+        int value = 0;
+
+        value = this.cards.get(id);
+
+        return value;
+    }
+
+    private void printCard(){
+        switch(this.numCard) {
+            case 1:
+                this.ivCard1.setVisibility(View.INVISIBLE);
+                this.id = getRandomCard();
+                oldValueCard = getValueCard(this.id);
+                this.ivCard1.setImageResource(this.id);
+                this.ivCard.setImageResource(this.id);
+                this.ivCard2.setImageResource(R.drawable.back);
+                this.ivCard3.setImageResource(R.drawable.back);
+                this.ivCard4.setImageResource(R.drawable.back);
+                this.ivCard5.setImageResource(R.drawable.back);
+                this.ivCard6.setImageResource(R.drawable.back);
+                this.ivCard2.setVisibility(View.VISIBLE);
+                this.ivCard3.setVisibility(View.VISIBLE);
+                this.ivCard4.setVisibility(View.VISIBLE);
+                this.ivCard5.setVisibility(View.VISIBLE);
+                this.ivCard6.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                this.ivCard1.setVisibility(View.VISIBLE);
+                this.ivCard2.setVisibility(View.INVISIBLE);
+                this.ivCard2.setImageResource(this.id);
+                break;
+            case 3:
+                this.ivCard2.setVisibility(View.VISIBLE);
+                this.ivCard3.setVisibility(View.INVISIBLE);
+                this.ivCard3.setImageResource(this.id);
+                break;
+            case 4:
+                this.ivCard3.setVisibility(View.VISIBLE);
+                this.ivCard4.setVisibility(View.INVISIBLE);
+                this.ivCard4.setImageResource(this.id);
+                break;
+            case 5:
+                this.ivCard4.setVisibility(View.VISIBLE);
+                this.ivCard5.setVisibility(View.INVISIBLE);
+                this.ivCard5.setImageResource(this.id);
+                break;
+            case 6:
+                this.ivCard5.setVisibility(View.VISIBLE);
+                this.ivCard6.setVisibility(View.INVISIBLE);
+                break;
+        }
+    }
+
+    private int testID(List<String> list, String id)
+    {
+        int test = 0;
+        for(int i = 0 ; i < list.size() ; i++)
+        {
+            if(list.get(i).equals(id))
+            {
+                test = 1;
+            }
+        }
+        return test;
+    }
+
+    private void alertePerdu(int gorgees)
+    {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(HighwayActivity.this);
+        alertDialogBuilder.setTitle("PERDU");
+        alertDialogBuilder.setMessage("Perdu ! Bois " + gorgees + " gorgées.");
+        alertDialogBuilder.setPositiveButton("OK..", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                newManche();
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void alerteGagne(String player)
+    {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(HighwayActivity.this);
+        alertDialogBuilder.setTitle("Félicitations " + player + " !!");
+        alertDialogBuilder.setMessage("Tu peux distribuer 6 gorgées.");
+        alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                nextPlayer();
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void alerteNextPlayer(String player)
+    {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(HighwayActivity.this);
+        alertDialogBuilder.setTitle("Changement de joueur");
+        alertDialogBuilder.setMessage(player + " à toi de jouer");
+        alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                newManche();
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void alertePerduPlayer()
+    {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(HighwayActivity.this);
+        alertDialogBuilder.setTitle("GAME OVER");
+        alertDialogBuilder.setMessage("Perdu ! Tu es nul. Cul sec.");
+        alertDialogBuilder.setPositiveButton("OK..", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (i >= nbJoueur)
+                    alerteFinJeu();
+                else
+                    nextPlayer();
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void alerteFinJeu() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(HighwayActivity.this);
+        alertDialogBuilder.setTitle("FIN DU JEU");
+        alertDialogBuilder.setMessage("Le jeu est terminé ! Pour fêter ça tout le monde boit.");
+        alertDialogBuilder.setPositiveButton("OUAAAAIS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                HighwayActivity.this.finish();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void initCards()
+    {
         cards = new HashMap<>();
         cards.put("as_carreau", 1);
         cards.put("as_coeur", 1);
@@ -133,84 +413,5 @@ public class HighwayActivity extends AppCompatActivity {
         cards.put("roi_coeur", 13);
         cards.put("roi_pique", 13);
         cards.put("roi_trefle", 13);
-
-        cardKey = new ArrayList<>(cards.keySet());
-
-        tvPlayer.setText(player.get(i));
-        tvManche.setText("Manche " + Integer.toString(manche));
-
-        /* Première carte */
-        ivCard1.setVisibility(View.INVISIBLE);
-        id = getRandomCard();
-        ivCard1.setImageResource(id);
-        ivCard.setImageResource(id);
-
-        /* Boutons */
-        btPlus.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                id = getRandomCard();
-                ivCard.setImageResource(id);
-                numCard++;
-                gestionDeck(ivCard1, ivCard2, ivCard3, ivCard4, ivCard5, ivCard6);
-            }
-        });
-
-        btMoins.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {ivCard.setImageResource(getRandomCard());
-            }
-        });
-    }
-
-    private int getRandomCard() {
-        Random rand = new Random();
-        String randomCard = cardKey.get(rand.nextInt(cardKey.size()));
-        int imageID = getResources().getIdentifier(randomCard , "drawable", getPackageName());
-
-        return imageID;
-    }
-
-    private int getValueCard(int id){
-        int value = 0;
-        String card = getResources().getResourceEntryName(id);
-
-        value = cards.get(card);
-
-        return value;
-    }
-
-    private void gestionDeck(ImageView iv1, ImageView iv2, ImageView iv3, ImageView iv4, ImageView iv5, ImageView iv6){
-        switch (numCard) {
-            case 2:
-                iv1.setVisibility(View.VISIBLE);
-                iv2.setVisibility(View.INVISIBLE);
-                iv2.setImageResource(id);
-                break;
-            case 3:
-                iv2.setVisibility(View.VISIBLE);
-                iv3.setVisibility(View.INVISIBLE);
-                iv3.setImageResource(id);
-                break;
-            case 4:
-                iv3.setVisibility(View.VISIBLE);
-                iv4.setVisibility(View.INVISIBLE);
-                iv4.setImageResource(id);
-                break;
-            case 5:
-                iv4.setVisibility(View.VISIBLE);
-                iv5.setVisibility(View.INVISIBLE);
-                iv5.setImageResource(id);
-                break;
-            case 6:
-                iv5.setVisibility(View.VISIBLE);
-                iv6.setVisibility(View.INVISIBLE);
-                break;
-            default:
-                Toast toast = Toast.makeText(getApplicationContext(), "Problème Switch", Toast.LENGTH_SHORT);
-                toast.show();
-        }
     }
 }
