@@ -32,8 +32,10 @@
             android:name=".BetSumActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".SelfDrawActivity"
+            android:name=".PrankPhoneActivity"
             android:screenOrientation="portrait"></activity>
     </application>
+
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
 </manifest>
