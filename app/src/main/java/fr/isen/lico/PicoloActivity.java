@@ -1,29 +1,27 @@
 package fr.isen.lico;
 
 import android.content.Intent;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.transform.Result;
 
 public class PicoloActivity extends AppCompatActivity {
 
     private int nbJoueur;
     private List<String> player = new ArrayList<String>();
-    private DatabaseReference mDatabase;
+
+    private Picolo picolo;
+    private String defi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +31,8 @@ public class PicoloActivity extends AppCompatActivity {
         /***** Element de la vue *****/
         final ImageView ivBack = findViewById(R.id.ivBack);
         final ImageView ivSetting = findViewById(R.id.ivSettings);
+        final TextView tvTheme = findViewById(R.id.tvTheme);
+        final TextView tvDefi = findViewById(R.id.tvDefi);
 
         /***** Récupération des données *****/
         Intent intent = getIntent();
@@ -59,30 +59,33 @@ public class PicoloActivity extends AppCompatActivity {
             }
         });
 
-        /***** Firebase *****/
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        /***** Récupérer BDD *****/
+        new HttpHandler(new CallBackInterface() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
-                    //String name = (String) messageSnapshot.child("Divers").getValue();
-                    String message = (String) messageSnapshot.child("Dilemme").getValue();
-
-                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+            public void success(String json) {
+                Gson gson = new GsonBuilder().create();
+                picolo = gson.fromJson(json, Picolo.class);
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Toast toast = Toast.makeText(getApplicationContext(), "Failed to read value", Toast.LENGTH_SHORT);
-                toast.show();
+            public void error() {
+                tvDefi.setText("error");
+            }
+        }).execute("");
+
+        /***** Afficher Défi *****/
+        tvDefi.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                defi = getDefi();
+                tvDefi.setText(defi);
             }
         });
 
+    }
+
+    private String getDefi() {
+        return picolo.getRandomDivers();
     }
 }

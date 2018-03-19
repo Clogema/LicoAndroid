@@ -16,12 +16,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MenuLicoActivity" />
-        <activity android:name=".PicoloActivity" />
-        <activity android:name=".SettingActivity" />
-        <activity android:name=".HighwayActivity" />
-        <activity android:name=".BetSumActivity" />
-        <activity android:name=".SelfDrawActivity"></activity>
+        <activity
+            android:name=".MenuLicoActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".PicoloActivity"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".SettingActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".HighwayActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".BetSumActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".SelfDrawActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
