@@ -9,6 +9,7 @@ public class Jeu {
     private String[] Dilemme;
     private String[] Divers;
     private String[] Caliente;
+    private String Mode;
 
     public String[] getTheme ()
     {
@@ -50,11 +51,25 @@ public class Jeu {
         this.Divers = Divers;
     }
 
+    public String getMode () {
+        return Mode;
+    }
+
     public String getRandomDivers ()
     {
         String rand = Divers[(int)(Math.random() * Divers.length)];
-        rand = rand.replace("THEME", getRandomTheme());
-        rand = rand.replace("DILEMME", getRandomDilemme());
+
+        if (rand.contains("THEME")) {
+            this.Mode = "Thème";
+            rand = rand.replace("THEME", getRandomTheme());
+        }
+        else if (rand.contains("DILEMME")) {
+            this.Mode = "Dilemme";
+            rand = rand.replace("DILEMME.", getRandomDilemme());
+        }
+        else {
+            this.Mode = "Jeu";
+        }
         return rand;
     }
 
@@ -73,10 +88,14 @@ public class Jeu {
         String rand = "";
         int i = (int)(Math.random() * 100);
 
-        if(i < 20)
+        if(i < 10)
+        {
+            this.Mode = "Caliente";
             rand = getRandomCaliente() + "";
-        else
+        }
+        else {
             rand = getRandomDivers() + "";
+        }
 
         return rand;
     }

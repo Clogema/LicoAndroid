@@ -94,14 +94,14 @@ public class PicoloActivity extends AppCompatActivity {
         String d = "";
         int rand1, rand2;
 
-        int i = (int)(Math.random() * 200);
+        int i = (int)(Math.random() * 100);
 
-        if (i < 100) {
+        if (i < 50) {
             d = picolo.getRandomDivers();
             theme = "Divers";
         } else {
             d = picolo.getRandomJeu();
-            theme = "Jeu";
+            theme = picolo.getMode();
         }
 
         rand1 = (int)(Math.random() * nbJoueur);

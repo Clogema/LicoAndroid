@@ -9,6 +9,7 @@ import fr.isen.lico.Jeu;
 public class Picolo {
     private Jeu Jeu;
     private String[] Divers;
+    private String Mode;
 
     public fr.isen.lico.Jeu getJeu ()
     {
@@ -22,12 +23,19 @@ public class Picolo {
 
     public String getRandomJeu ()
     {
-        return Jeu.getRandom();
+        String jeu = Jeu.getRandom();
+        this.Mode = Jeu.getMode();
+        return jeu;
     }
 
     public String[] getDivers ()
     {
         return Divers;
+    }
+
+    public String getMode ()
+    {
+        return Mode;
     }
 
     public String getRandomDivers ()
