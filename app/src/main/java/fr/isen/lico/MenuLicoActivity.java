@@ -25,7 +25,7 @@ public class MenuLicoActivity extends AppCompatActivity {
         final ImageView ivPicolo = findViewById(R.id.ivPicolo);
         final ImageView ivHighway = findViewById(R.id.ivHighway);
         final ImageView ivBetsum = findViewById(R.id.ivBetsum);
-        final ImageView ivSelfdraw = findViewById(R.id.ivSelfdraw);
+        final ImageView ivPhone = findViewById(R.id.ivPhone);
         final ImageView ivBack = findViewById(R.id.ivBack);
         final ImageView ivSetting = findViewById(R.id.ivSettings);
 
@@ -123,12 +123,12 @@ public class MenuLicoActivity extends AppCompatActivity {
         });
 
         /** SELFDRAW */
-        ivSelfdraw.setOnClickListener(new View.OnClickListener() {
+        ivPhone.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MenuLicoActivity.this);
-                alertDialogBuilder.setTitle(R.string.selfdraw);
+                alertDialogBuilder.setTitle(R.string.phone);
                 alertDialogBuilder.setMessage(R.string.descDrawSelf);
                 alertDialogBuilder.setPositiveButton("Jouer", new DialogInterface.OnClickListener() {
                     @Override
