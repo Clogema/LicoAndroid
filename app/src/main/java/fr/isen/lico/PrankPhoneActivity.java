@@ -138,15 +138,22 @@ public class PrankPhoneActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         checkPermissionCall();
-                        tvPlayer.setText(setPlayer());
-                        tvMot.setText(mots.getMot());
-                        checkPermissionContact();
-                    }
-                });
-                alertDialogBuilder.setNegativeButton("NON", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+
+                        AlertDialog.Builder alertDialogBuilder1 = new AlertDialog.Builder(PrankPhoneActivity.this);
+                        alertDialogBuilder1.setTitle("Félicitations !");
+                        alertDialogBuilder1.setMessage("Tu as relevé le défi, tu as le droit de distribuer 5 gorgées.");
+                        alertDialogBuilder1.setPositiveButton("Merciii", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                tvPlayer.setText(setPlayer());
+                                tvMot.setText(mots.getMot());
+                                checkPermissionContact();
+                            }
+                        });
+
+                        AlertDialog alertDialog1 = alertDialogBuilder1.create();
+                        alertDialog1.show();
                     }
                 });
 
