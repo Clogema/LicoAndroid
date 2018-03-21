@@ -129,7 +129,7 @@ public class MenuLicoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MenuLicoActivity.this);
                 alertDialogBuilder.setTitle(R.string.phone);
-                alertDialogBuilder.setMessage(R.string.descDrawSelf);
+                alertDialogBuilder.setMessage(R.string.descPrank);
                 alertDialogBuilder.setPositiveButton("Jouer", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int arg1) {

@@ -14,10 +14,12 @@ import java.net.URL;
 public class HttpHandler extends AsyncTask<String, Void, String> {
 
     private CallBackInterface callBackInterface;
+    private String URL;
     String resultat = "";
 
-    public HttpHandler(CallBackInterface callBackInterfaceImplementation){
+    public HttpHandler(CallBackInterface callBackInterfaceImplementation, String url){
         this.callBackInterface = callBackInterfaceImplementation;
+        this.URL = url;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class HttpHandler extends AsyncTask<String, Void, String> {
         StringBuilder result = new StringBuilder();
 
         try {
-            webServiceUrl = new URL("https://lico-picolo.firebaseio.com/Picolo.json");
+            webServiceUrl = new URL(this.URL);
             HttpURLConnection urlConnection = (HttpURLConnection) webServiceUrl.openConnection();
             urlConnection.connect();
 

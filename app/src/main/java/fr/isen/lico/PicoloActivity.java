@@ -18,6 +18,7 @@ import javax.xml.transform.Result;
 public class PicoloActivity extends AppCompatActivity {
 
     private int nbJoueur;
+    private String URL = "https://lico-picolo.firebaseio.com/Picolo.json";
     private List<String> player = new ArrayList<String>();
 
     private Picolo picolo;
@@ -76,7 +77,7 @@ public class PicoloActivity extends AppCompatActivity {
             public void error() {
                 tvDefi.setText("error");
             }
-        }).execute("");
+        }, URL).execute("");
 
 
         /***** Afficher Défi *****/
