@@ -21,6 +21,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,12 +32,14 @@ public class PrankPhoneActivity extends AppCompatActivity {
 
     private int nbJoueur;
     private List<String> player = new ArrayList<String>();
+    private String URL = "https://lico-prankphone.firebaseio.com/PrankPhone.json";
     private static final int PERMISSION_REQUEST_READ_CONTACTS = 30;
     private static final int PERMISSION_REQUEST_CALL_PHONE = 10;
 
-    private TextView tvContact, tvPlayer, tvNumber;
+    private TextView tvContact, tvPlayer, tvNumber, tvMot;
 
-    private String nom, numero;
+    private String nom, numero, mot;
+    private PrankPhone mots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,7 @@ public class PrankPhoneActivity extends AppCompatActivity {
         tvPlayer = findViewById(R.id.tvPlayer);
         tvContact = findViewById(R.id.tvContact);
         tvNumber = findViewById(R.id.tvNumber);
+        tvMot = findViewById(R.id.tvMot);
         final Button btCall = findViewById(R.id.btCall);
         final Button btDrink = findViewById(R.id.btDrink);
 
@@ -75,9 +81,22 @@ public class PrankPhoneActivity extends AppCompatActivity {
             }
         });
 
-        tvPlayer.setText(setPlayer());
-        checkPermissionContact();
+        /***** Récupérer BDD *****/
+        new HttpHandler(new CallBackInterface() {
+            @Override
+            public void success(String json) {
+                Gson gson = new GsonBuilder().create();
+                mots = gson.fromJson(json, PrankPhone.class);
+                tvPlayer.setText(setPlayer());
+                tvMot.setText(mots.getMot());
+                checkPermissionContact();
+            }
 
+            @Override
+            public void error() {
+                tvMot.setText("error");
+            }
+        }, URL).execute("");
 
         btDrink.setOnClickListener(new View.OnClickListener() {
 
@@ -91,6 +110,7 @@ public class PrankPhoneActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         tvPlayer.setText(setPlayer());
+                        tvMot.setText(mots.getMot());
                         checkPermissionContact();
                     }
                 });
@@ -119,6 +139,7 @@ public class PrankPhoneActivity extends AppCompatActivity {
                         dialog.cancel();
                         checkPermissionCall();
                         tvPlayer.setText(setPlayer());
+                        tvMot.setText(mots.getMot());
                         checkPermissionContact();
                     }
                 });
