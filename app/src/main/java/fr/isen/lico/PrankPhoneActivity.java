@@ -30,7 +30,7 @@ import java.util.List;
 
 public class PrankPhoneActivity extends AppCompatActivity {
 
-    private int nbJoueur;
+    private int nbJoueur, i = -1;
     private List<String> player = new ArrayList<String>();
     private String URL = "https://lico-prankphone.firebaseio.com/PrankPhone.json";
     private static final int PERMISSION_REQUEST_READ_CONTACTS = 30;
@@ -238,6 +238,7 @@ public class PrankPhoneActivity extends AppCompatActivity {
     }
 
     private String setPlayer() {
-        return player.get((int)(Math.random() * nbJoueur));
+        i++;
+        return player.get(i%nbJoueur);
     }
 }
